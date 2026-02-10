@@ -12,6 +12,14 @@ local Library = {}
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 
+-- Theme helper: library will read global _G.KaszaelThemeColor if set by executor
+local function getThemeColor()
+    if _G and _G.KaszaelThemeColor then
+        return _G.KaszaelThemeColor
+    end
+    return Color3.fromRGB(232, 17, 85)
+end
+
 -- Create UI
 function Library:Window(title)
     local ui = Instance.new("ScreenGui")
@@ -127,7 +135,7 @@ function Library:Window(title)
     Logo.Position = UDim2.new(0, 4, 0.5, 0)
     Logo.Size = UDim2.new(0, 26, 0, 30)
     Logo.Image = "http://www.roblox.com/asset/?id=113654283207774"
-    Logo.ImageColor3 = Color3.fromRGB(232, 17, 85)
+    Logo.ImageColor3 = getThemeColor()
     
     -- Minimize Button (using minus icon)
     local Minimize = Instance.new("ImageButton")
@@ -147,7 +155,7 @@ function Library:Window(title)
     MinimizedIcon.Name = "MinimizedIcon"
     MinimizedIcon.Parent = ui
     MinimizedIcon.AnchorPoint = Vector2.new(1, 1)
-    MinimizedIcon.BackgroundColor3 = Color3.fromRGB(232, 17, 85)
+    MinimizedIcon.BackgroundColor3 = getThemeColor()
     MinimizedIcon.BackgroundTransparency = 0
     MinimizedIcon.BorderSizePixel = 0
     MinimizedIcon.Position = UDim2.new(1, -20, 1, -20)
@@ -251,7 +259,7 @@ function Library:Window(title)
     GameName.Size = UDim2.new(0, 165, 0, 22)
     GameName.Font = Enum.Font.Gotham
     GameName.Text = title or "Game Name"
-    GameName.TextColor3 = Color3.fromRGB(232, 17, 85)
+    GameName.TextColor3 = getThemeColor()
     GameName.TextSize = 14.000
     GameName.TextXAlignment = Enum.TextXAlignment.Left
     
@@ -475,7 +483,11 @@ function Library:Window(title)
             local Button = Instance.new("TextButton")
             Button.Name = "Button"
             Button.Parent = Page
-            Button.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
+            -- Theme-aware colors
+            local theme = getThemeColor()
+            local baseColor = Color3.new(theme.R * 0.85, theme.G * 0.85, theme.B * 0.85)
+            local hoverColor = Color3.new(math.min(theme.R * 1.15, 1), math.min(theme.G * 1.15, 1), math.min(theme.B * 1.15, 1))
+            Button.BackgroundColor3 = baseColor
             Button.BorderSizePixel = 0
             Button.Size = UDim2.new(1, -6, 0, 34)
             Button.AutoButtonColor = false
@@ -483,23 +495,23 @@ function Library:Window(title)
             Button.Text = text or "Button"
             Button.TextColor3 = Color3.fromRGB(255, 255, 255)
             Button.TextSize = 14.000
-            
+
             local ButtonCorner = Instance.new("UICorner")
             ButtonCorner.CornerRadius = UDim.new(0, 6)
             ButtonCorner.Parent = Button
-            
+
             Button.MouseEnter:Connect(function()
-                TweenService:Create(Button, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(160, 12, 59)}):Play()
+                TweenService:Create(Button, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = hoverColor}):Play()
             end)
-            
+
             Button.MouseLeave:Connect(function()
-                TweenService:Create(Button, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(134, 10, 49)}):Play()
+                TweenService:Create(Button, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = baseColor}):Play()
             end)
-            
+
             Button.MouseButton1Click:Connect(function()
                 callback()
             end)
-            
+
             -- Mobile support
             Button.TouchTap:Connect(function()
                 callback()
@@ -677,7 +689,8 @@ function Library:Window(title)
             local SliderDrag = Instance.new("Frame")
             SliderDrag.Name = "SliderDrag"
             SliderDrag.Parent = SliderClick
-            SliderDrag.BackgroundColor3 = Color3.fromRGB(188, 14, 69)
+            -- Theme-aware slider fill
+            SliderDrag.BackgroundColor3 = getThemeColor()
             SliderDrag.Size = UDim2.new((default - min) / (max - min), 0, 1, 0)
             
             local SliderDragCorner = Instance.new("UICorner")
