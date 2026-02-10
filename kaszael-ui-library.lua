@@ -117,7 +117,7 @@ function Library:Window(title)
     Line.Position = UDim2.new(0.5, 0, 1, 1)
     Line.Size = UDim2.new(1, 0, 0, 1)
     
-    -- Logo - Updated to use the new icon
+    -- Logo
     local Logo = Instance.new("ImageLabel")
     Logo.Name = "Logo"
     Logo.Parent = Top
@@ -126,10 +126,10 @@ function Library:Window(title)
     Logo.BackgroundTransparency = 1.000
     Logo.Position = UDim2.new(0, 4, 0.5, 0)
     Logo.Size = UDim2.new(0, 26, 0, 30)
-    Logo.Image = "http://www.roblox.com/asset/?id=127183954724660" -- Updated icon
+    Logo.Image = "http://www.roblox.com/asset/?id=113654283207774"
     Logo.ImageColor3 = Color3.fromRGB(232, 17, 85)
     
-    -- Minimize Button - Updated to use the new minus icon
+    -- Minimize Button (using minus icon)
     local Minimize = Instance.new("ImageButton")
     Minimize.Name = "Minimize"
     Minimize.Parent = Top
@@ -138,11 +138,11 @@ function Library:Window(title)
     Minimize.BackgroundTransparency = 1.000
     Minimize.Position = UDim2.new(1, -30, 0.5, 0)
     Minimize.Size = UDim2.new(0, 20, 0, 20)
-    Minimize.Image = "rbxassetid://119836694725021" -- Updated minus icon
+    Minimize.Image = "rbxassetid://7733771811" -- Minus icon
     Minimize.ImageColor3 = Color3.fromRGB(199, 199, 199)
     Minimize.ScaleType = Enum.ScaleType.Crop
     
-    -- Minimized Icon (initially hidden) - Updated to use the new icon
+    -- Minimized Icon (initially hidden)
     local MinimizedIcon = Instance.new("ImageButton")
     MinimizedIcon.Name = "MinimizedIcon"
     MinimizedIcon.Parent = ui
@@ -154,7 +154,7 @@ function Library:Window(title)
     MinimizedIcon.Size = UDim2.new(0, 40, 0, 40)
     MinimizedIcon.Visible = false
     MinimizedIcon.ZIndex = 10
-    MinimizedIcon.Image = "http://www.roblox.com/asset/?id=127183954724660" -- Updated icon
+    MinimizedIcon.Image = "http://www.roblox.com/asset/?id=113654283207774"
     
     local MinimizedCorner = Instance.new("UICorner")
     MinimizedCorner.CornerRadius = UDim.new(0, 8)
@@ -833,322 +833,322 @@ function Library:Window(title)
             
             local BoxCorner = Instance.new("UICorner")
             BoxCorner.CornerRadius = UDim.new(0, 4)
-    BoxCorner.Parent = Box
-    
-    Box.FocusLost:Connect(function(enterPressed)
-        if enterPressed then
-            callback(Box.Text)
-        end
-    end)
-    
-    -- Mobile support
-    Box.TouchTap:Connect(function()
-        Box:CaptureFocus()
-    end)
-end
-
--- Dropdown
-function Elements:Dropdown(text, options, callback, multiSelect)
-    multiSelect = multiSelect or false
-    options = options or {}
-    callback = callback or function() end
-    
-    local Dropdown = Instance.new("Frame")
-    Dropdown.Name = "Dropdown"
-    Dropdown.Parent = Page
-    Dropdown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Dropdown.BackgroundTransparency = 1.000
-    Dropdown.BorderSizePixel = 0
-    Dropdown.ClipsDescendants = true
-    Dropdown.Size = UDim2.new(1, -6, 0, 34)
-    
-    local DropdownList = Instance.new("UIListLayout")
-    DropdownList.Parent = Dropdown
-    DropdownList.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    DropdownList.SortOrder = Enum.SortOrder.LayoutOrder
-    DropdownList.Padding = UDim.new(0, 5)
-    
-    local Choose = Instance.new("Frame")
-    Choose.Name = "Choose"
-    Choose.Parent = Dropdown
-    Choose.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    Choose.BorderSizePixel = 0
-    Choose.Size = UDim2.new(1, 0, 0, 34)
-    
-    local ChooseCorner = Instance.new("UICorner")
-    ChooseCorner.CornerRadius = UDim.new(0, 6)
-    ChooseCorner.Parent = Choose
-    
-    local Title = Instance.new("TextLabel")
-    Title.Name = "Title"
-    Title.Parent = Choose
-    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    Title.BackgroundTransparency = 1.000
-    Title.Position = UDim2.new(0, 8, 0, 0)
-    Title.Size = UDim2.new(1, -6, 1, 0)
-    Title.Font = Enum.Font.Gotham
-    Title.Text = text or "Dropdown"
-    Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.TextSize = 14.000
-    Title.TextXAlignment = Enum.TextXAlignment.Left
-    
-    local Arrow = Instance.new("ImageButton")
-    Arrow.Name = "Arrow"
-    Arrow.Parent = Choose
-    Arrow.AnchorPoint = Vector2.new(1, 0.5)
-    Arrow.BackgroundTransparency = 1.000
-    Arrow.LayoutOrder = 10
-    Arrow.Position = UDim2.new(1, -2, 0.5, 0)
-    Arrow.Size = UDim2.new(0, 28, 0, 28)
-    Arrow.ZIndex = 2
-    Arrow.Image = "rbxassetid://3926307971"
-    Arrow.ImageColor3 = Color3.fromRGB(161, 12, 59)
-    Arrow.ImageRectOffset = Vector2.new(324, 524)
-    Arrow.ImageRectSize = Vector2.new(36, 36)
-    Arrow.ScaleType = Enum.ScaleType.Crop
-    
-    local OptionHolder = Instance.new("Frame")
-    OptionHolder.Name = "OptionHolder"
-    OptionHolder.Parent = Dropdown
-    OptionHolder.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-    OptionHolder.BorderSizePixel = 0
-    OptionHolder.Position = UDim2.new(0, 0, 0, 34)
-    OptionHolder.Size = UDim2.new(1, 0, 0, 0)
-    
-    local OptionHolderCorner = Instance.new("UICorner")
-    OptionHolderCorner.CornerRadius = UDim.new(0, 6)
-    OptionHolderCorner.Parent = OptionHolder
-    
-    local OptionList = Instance.new("UIListLayout")
-    OptionList.Name = "OptionList"
-    OptionList.Parent = OptionHolder
-    OptionList.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    OptionList.SortOrder = Enum.SortOrder.LayoutOrder
-    OptionList.Padding = UDim.new(0, 5)
-    
-    local OptionPadding = Instance.new("UIPadding")
-    OptionPadding.Parent = OptionHolder
-    OptionPadding.PaddingTop = UDim.new(0, 8)
-    
-    local dropped = false
-    local selected = {}
-    
-    local function updateTitle()
-        if multiSelect then
-            local selectedList = {}
-            for item, _ in pairs(selected) do
-                table.insert(selectedList, item)
-            end
+            BoxCorner.Parent = Box
             
-            if #selectedList > 0 then
-                if #selectedList <= 3 then
-                    Title.Text = text .. ": " .. table.concat(selectedList, ", ")
-                else
-                    Title.Text = text .. ": " .. #selectedList .. " selected"
-                end
-            else
-                Title.Text = text
-            end
-        end
-    end
-    
-    -- Create options
-    for i, option in ipairs(options) do
-        local Option = Instance.new("TextButton")
-        Option.Name = "Option"
-        Option.Parent = OptionHolder
-        Option.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
-        Option.BorderSizePixel = 0
-        Option.Size = UDim2.new(1, -16, 0, 30)
-        Option.AutoButtonColor = false
-        Option.Font = Enum.Font.Gotham
-        Option.Text = option
-        Option.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Option.TextSize = 14.000
-        
-        local OptionCorner = Instance.new("UICorner")
-        OptionCorner.CornerRadius = UDim.new(0, 6)
-        OptionCorner.Parent = Option
-        
-        -- Add checkmark for multi-select
-        if multiSelect then
-            local Checkmark = Instance.new("ImageLabel")
-            Checkmark.Name = "Checkmark"
-            Checkmark.Parent = Option
-            Checkmark.BackgroundTransparency = 1
-            Checkmark.Image = "rbxassetid://6031068421"
-            Checkmark.ImageTransparency = 1
-            Checkmark.Size = UDim2.new(0, 16, 0, 16)
-            Checkmark.Position = UDim2.new(0, 8, 0.5, -8)
-        end
-        
-        Option.MouseButton1Click:Connect(function()
-            if multiSelect then
-                -- Toggle selection
-                if selected[option] then
-                    selected[option] = nil
-                    Option.Checkmark.ImageTransparency = 1
-                else
-                    selected[option] = true
-                    Option.Checkmark.ImageTransparency = 0
-                end
-                
-                updateTitle()
-                
-                -- Pass selected items to callback
-                local selectedList = {}
-                for item, _ in pairs(selected) do
-                    table.insert(selectedList, item)
-                end
-                callback(selectedList)
-            else
-                -- Single select
-                callback(option)
-                Title.Text = text .. ": " .. option
-                dropped = false
-                TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
-                Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
-            end
-        end)
-        
-        -- Mobile support
-        Option.TouchTap:Connect(function()
-            Option.MouseButton1Click:Fire()
-        end)
-    end
-    
-    -- Update option holder size
-    OptionList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-        if dropped then
-            OptionHolder.Size = UDim2.new(1, 0, 0, OptionList.AbsoluteContentSize.Y + 15)
-            Dropdown.Size = UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15)
-        end
-    end)
-    
-    -- Toggle dropdown
-    Choose.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dropped = not dropped
-            
-            if dropped then
-                Dropdown:TweenSize(UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .15, true)
-                TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
-            else
-                TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
-                Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .15, true)
-            end
-        end
-    end)
-    
-    -- Mobile support
-    Choose.TouchTap:Connect(function()
-        Choose.InputBegan:Fire(UserInputService.CreateInputEvent(
-            Enum.UserInputType.MouseButton1,
-            Enum.UserInputState.Begin,
-            0,
-            Vector2.new(0, 0)
-        ))
-    end)
-    
-    -- Dropdown functions
-    local DropdownFunctions = {}
-    
-    function DropdownFunctions:Refresh(newOptions)
-        newOptions = newOptions or {}
-        selected = {}
-        dropped = false
-        
-        TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
-        Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
-        
-        -- Clear existing options
-        for _, child in ipairs(OptionHolder:GetChildren()) do
-            if child:IsA("TextButton") then
-                child:Destroy()
-            end
-        end
-        
-        -- Reset title
-        Title.Text = text
-        
-        -- Create new options
-        for i, option in ipairs(newOptions) do
-            local Option = Instance.new("TextButton")
-            Option.Name = "Option"
-            Option.Parent = OptionHolder
-            Option.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
-            Option.BorderSizePixel = 0
-            Option.Size = UDim2.new(1, -16, 0, 30)
-            Option.AutoButtonColor = false
-            Option.Font = Enum.Font.Gotham
-            Option.Text = option
-            Option.TextColor3 = Color3.fromRGB(255, 255, 255)
-            Option.TextSize = 14.000
-            
-            local OptionCorner = Instance.new("UICorner")
-            OptionCorner.CornerRadius = UDim.new(0, 6)
-            OptionCorner.Parent = Option
-            
-            -- Add checkmark for multi-select
-            if multiSelect then
-                local Checkmark = Instance.new("ImageLabel")
-                Checkmark.Name = "Checkmark"
-                Checkmark.Parent = Option
-                Checkmark.BackgroundTransparency = 1
-                Checkmark.Image = "rbxassetid://6031068421"
-                Checkmark.ImageTransparency = 1
-                Checkmark.Size = UDim2.new(0, 16, 0, 16)
-                Checkmark.Position = UDim2.new(0, 8, 0.5, -8)
-            end
-            
-            Option.MouseButton1Click:Connect(function()
-                if multiSelect then
-                    if selected[option] then
-                        selected[option] = nil
-                        Option.Checkmark.ImageTransparency = 1
-                    else
-                        selected[option] = true
-                        Option.Checkmark.ImageTransparency = 0
-                    end
-                    
-                    updateTitle()
-                    
-                    local selectedList = {}
-                    for item, _ in pairs(selected) do
-                        table.insert(selectedList, item)
-                    end
-                    callback(selectedList)
-                else
-                    callback(option)
-                    Title.Text = text .. ": " .. option
-                    dropped = false
-                    TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
-                    Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
+            Box.FocusLost:Connect(function(enterPressed)
+                if enterPressed then
+                    callback(Box.Text)
                 end
             end)
             
             -- Mobile support
-            Option.TouchTap:Connect(function()
-                Option.MouseButton1Click:Fire()
+            Box.TouchTap:Connect(function()
+                Box:CaptureFocus()
             end)
         end
         
-        -- Update option holder size
-        OptionList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-            if dropped then
-                OptionHolder.Size = UDim2.new(1, 0, 0, OptionList.AbsoluteContentSize.Y + 15)
-                Dropdown.Size = UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15)
+        -- Dropdown
+        function Elements:Dropdown(text, options, callback, multiSelect)
+            multiSelect = multiSelect or false
+            options = options or {}
+            callback = callback or function() end
+            
+            local Dropdown = Instance.new("Frame")
+            Dropdown.Name = "Dropdown"
+            Dropdown.Parent = Page
+            Dropdown.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Dropdown.BackgroundTransparency = 1.000
+            Dropdown.BorderSizePixel = 0
+            Dropdown.ClipsDescendants = true
+            Dropdown.Size = UDim2.new(1, -6, 0, 34)
+            
+            local DropdownList = Instance.new("UIListLayout")
+            DropdownList.Parent = Dropdown
+            DropdownList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+            DropdownList.SortOrder = Enum.SortOrder.LayoutOrder
+            DropdownList.Padding = UDim.new(0, 5)
+            
+            local Choose = Instance.new("Frame")
+            Choose.Name = "Choose"
+            Choose.Parent = Dropdown
+            Choose.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            Choose.BorderSizePixel = 0
+            Choose.Size = UDim2.new(1, 0, 0, 34)
+            
+            local ChooseCorner = Instance.new("UICorner")
+            ChooseCorner.CornerRadius = UDim.new(0, 6)
+            ChooseCorner.Parent = Choose
+            
+            local Title = Instance.new("TextLabel")
+            Title.Name = "Title"
+            Title.Parent = Choose
+            Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Title.BackgroundTransparency = 1.000
+            Title.Position = UDim2.new(0, 8, 0, 0)
+            Title.Size = UDim2.new(1, -6, 1, 0)
+            Title.Font = Enum.Font.Gotham
+            Title.Text = text or "Dropdown"
+            Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Title.TextSize = 14.000
+            Title.TextXAlignment = Enum.TextXAlignment.Left
+            
+            local Arrow = Instance.new("ImageButton")
+            Arrow.Name = "Arrow"
+            Arrow.Parent = Choose
+            Arrow.AnchorPoint = Vector2.new(1, 0.5)
+            Arrow.BackgroundTransparency = 1.000
+            Arrow.LayoutOrder = 10
+            Arrow.Position = UDim2.new(1, -2, 0.5, 0)
+            Arrow.Size = UDim2.new(0, 28, 0, 28)
+            Arrow.ZIndex = 2
+            Arrow.Image = "rbxassetid://3926307971"
+            Arrow.ImageColor3 = Color3.fromRGB(161, 12, 59)
+            Arrow.ImageRectOffset = Vector2.new(324, 524)
+            Arrow.ImageRectSize = Vector2.new(36, 36)
+            Arrow.ScaleType = Enum.ScaleType.Crop
+            
+            local OptionHolder = Instance.new("Frame")
+            OptionHolder.Name = "OptionHolder"
+            OptionHolder.Parent = Dropdown
+            OptionHolder.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            OptionHolder.BorderSizePixel = 0
+            OptionHolder.Position = UDim2.new(0, 0, 0, 34)
+            OptionHolder.Size = UDim2.new(1, 0, 0, 0)
+            
+            local OptionHolderCorner = Instance.new("UICorner")
+            OptionHolderCorner.CornerRadius = UDim.new(0, 6)
+            OptionHolderCorner.Parent = OptionHolder
+            
+            local OptionList = Instance.new("UIListLayout")
+            OptionList.Name = "OptionList"
+            OptionList.Parent = OptionHolder
+            OptionList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+            OptionList.SortOrder = Enum.SortOrder.LayoutOrder
+            OptionList.Padding = UDim.new(0, 5)
+            
+            local OptionPadding = Instance.new("UIPadding")
+            OptionPadding.Parent = OptionHolder
+            OptionPadding.PaddingTop = UDim.new(0, 8)
+            
+            local dropped = false
+            local selected = {}
+            
+            local function updateTitle()
+                if multiSelect then
+                    local selectedList = {}
+                    for item, _ in pairs(selected) do
+                        table.insert(selectedList, item)
+                    end
+                    
+                    if #selectedList > 0 then
+                        if #selectedList <= 3 then
+                            Title.Text = text .. ": " .. table.concat(selectedList, ", ")
+                        else
+                            Title.Text = text .. ": " .. #selectedList .. " selected"
+                        end
+                    else
+                        Title.Text = text
+                    end
+                end
             end
-        end)
+            
+            -- Create options
+            for i, option in ipairs(options) do
+                local Option = Instance.new("TextButton")
+                Option.Name = "Option"
+                Option.Parent = OptionHolder
+                Option.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
+                Option.BorderSizePixel = 0
+                Option.Size = UDim2.new(1, -16, 0, 30)
+                Option.AutoButtonColor = false
+                Option.Font = Enum.Font.Gotham
+                Option.Text = option
+                Option.TextColor3 = Color3.fromRGB(255, 255, 255)
+                Option.TextSize = 14.000
+                
+                local OptionCorner = Instance.new("UICorner")
+                OptionCorner.CornerRadius = UDim.new(0, 6)
+                OptionCorner.Parent = Option
+                
+                -- Add checkmark for multi-select
+                if multiSelect then
+                    local Checkmark = Instance.new("ImageLabel")
+                    Checkmark.Name = "Checkmark"
+                    Checkmark.Parent = Option
+                    Checkmark.BackgroundTransparency = 1
+                    Checkmark.Image = "rbxassetid://6031068421"
+                    Checkmark.ImageTransparency = 1
+                    Checkmark.Size = UDim2.new(0, 16, 0, 16)
+                    Checkmark.Position = UDim2.new(0, 8, 0.5, -8)
+                end
+                
+                Option.MouseButton1Click:Connect(function()
+                    if multiSelect then
+                        -- Toggle selection
+                        if selected[option] then
+                            selected[option] = nil
+                            Option.Checkmark.ImageTransparency = 1
+                        else
+                            selected[option] = true
+                            Option.Checkmark.ImageTransparency = 0
+                        end
+                        
+                        updateTitle()
+                        
+                        -- Pass selected items to callback
+                        local selectedList = {}
+                        for item, _ in pairs(selected) do
+                            table.insert(selectedList, item)
+                        end
+                        callback(selectedList)
+                    else
+                        -- Single select
+                        callback(option)
+                        Title.Text = text .. ": " .. option
+                        dropped = false
+                        TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+                        Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
+                    end
+                end)
+                
+                -- Mobile support
+                Option.TouchTap:Connect(function()
+                    Option.MouseButton1Click:Fire()
+                end)
+            end
+            
+            -- Update option holder size
+            OptionList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                if dropped then
+                    OptionHolder.Size = UDim2.new(1, 0, 0, OptionList.AbsoluteContentSize.Y + 15)
+                    Dropdown.Size = UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15)
+                end
+            end)
+            
+            -- Toggle dropdown
+            Choose.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    dropped = not dropped
+                    
+                    if dropped then
+                        Dropdown:TweenSize(UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .15, true)
+                        TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 180}):Play()
+                    else
+                        TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+                        Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quad, .15, true)
+                    end
+                end
+            end)
+            
+            -- Mobile support
+            Choose.TouchTap:Connect(function()
+                Choose.InputBegan:Fire(UserInputService.CreateInputEvent(
+                    Enum.UserInputType.MouseButton1,
+                    Enum.UserInputState.Begin,
+                    0,
+                    Vector2.new(0, 0)
+                ))
+            end)
+            
+            -- Dropdown functions
+            local DropdownFunctions = {}
+            
+            function DropdownFunctions:Refresh(newOptions)
+                newOptions = newOptions or {}
+                selected = {}
+                dropped = false
+                
+                TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+                Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
+                
+                -- Clear existing options
+                for _, child in ipairs(OptionHolder:GetChildren()) do
+                    if child:IsA("TextButton") then
+                        child:Destroy()
+                    end
+                end
+                
+                -- Reset title
+                Title.Text = text
+                
+                -- Create new options
+                for i, option in ipairs(newOptions) do
+                    local Option = Instance.new("TextButton")
+                    Option.Name = "Option"
+                    Option.Parent = OptionHolder
+                    Option.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
+                    Option.BorderSizePixel = 0
+                    Option.Size = UDim2.new(1, -16, 0, 30)
+                    Option.AutoButtonColor = false
+                    Option.Font = Enum.Font.Gotham
+                    Option.Text = option
+                    Option.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    Option.TextSize = 14.000
+                    
+                    local OptionCorner = Instance.new("UICorner")
+                    OptionCorner.CornerRadius = UDim.new(0, 6)
+                    OptionCorner.Parent = Option
+                    
+                    -- Add checkmark for multi-select
+                    if multiSelect then
+                        local Checkmark = Instance.new("ImageLabel")
+                        Checkmark.Name = "Checkmark"
+                        Checkmark.Parent = Option
+                        Checkmark.BackgroundTransparency = 1
+                        Checkmark.Image = "rbxassetid://6031068421"
+                        Checkmark.ImageTransparency = 1
+                        Checkmark.Size = UDim2.new(0, 16, 0, 16)
+                        Checkmark.Position = UDim2.new(0, 8, 0.5, -8)
+                    end
+                    
+                    Option.MouseButton1Click:Connect(function()
+                        if multiSelect then
+                            if selected[option] then
+                                selected[option] = nil
+                                Option.Checkmark.ImageTransparency = 1
+                            else
+                                selected[option] = true
+                                Option.Checkmark.ImageTransparency = 0
+                            end
+                            
+                            updateTitle()
+                            
+                            local selectedList = {}
+                            for item, _ in pairs(selected) do
+                                table.insert(selectedList, item)
+                            end
+                            callback(selectedList)
+                        else
+                            callback(option)
+                            Title.Text = text .. ": " .. option
+                            dropped = false
+                            TweenService:Create(Arrow, TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Rotation = 0}):Play()
+                            Dropdown:TweenSize(UDim2.new(1, -6, 0, 34), Enum.EasingDirection.Out, Enum.EasingStyle.Quart, .15, true)
+                        end
+                    end)
+                    
+                    -- Mobile support
+                    Option.TouchTap:Connect(function()
+                        Option.MouseButton1Click:Fire()
+                    end)
+                end
+                
+                -- Update option holder size
+                OptionList:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                    if dropped then
+                        OptionHolder.Size = UDim2.new(1, 0, 0, OptionList.AbsoluteContentSize.Y + 15)
+                        Dropdown.Size = UDim2.new(1, -6, 0, 34 + OptionList.AbsoluteContentSize.Y + 15)
+                    end
+                end)
+            end
+            
+            return DropdownFunctions
+        end
+        
+        return Elements
     end
     
-    return DropdownFunctions
-end
-
-return Elements
-end
-
-return TabFunctions
+    return TabFunctions
 end
 
 return Library
