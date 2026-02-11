@@ -915,7 +915,7 @@ function Library:Window(title)
             Arrow.Size = UDim2.new(0, 28, 0, 28)
             Arrow.ZIndex = 2
             Arrow.Image = "rbxassetid://3926307971"
-            Arrow.ImageColor3 = Color3.fromRGB(161, 12, 59)
+            Arrow.ImageColor3 = getThemeColor()
             Arrow.ImageRectOffset = Vector2.new(324, 524)
             Arrow.ImageRectSize = Vector2.new(36, 36)
             Arrow.ScaleType = Enum.ScaleType.Crop
@@ -970,7 +970,8 @@ function Library:Window(title)
                 local Option = Instance.new("TextButton")
                 Option.Name = "Option"
                 Option.Parent = OptionHolder
-                Option.BackgroundColor3 = Color3.fromRGB(134, 10, 49)
+                local themeColor = getThemeColor()
+                Option.BackgroundColor3 = Color3.new(themeColor.R * 0.53, themeColor.G * 0.53, themeColor.B * 0.53)
                 Option.BorderSizePixel = 0
                 Option.Size = UDim2.new(1, -16, 0, 30)
                 Option.AutoButtonColor = false
